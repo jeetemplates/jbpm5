@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:drools="http://www.jboss.org/drools" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd" id="Definitions_1" targetNamespace="http://www.jboss.org/drools">
+  <bpmn2:itemDefinition id="ItemDefinition_1" structureRef="java.lang.String"/>
+  <bpmn2:message id="Message_START_PROCESS" itemRef="ItemDefinition_1" name="Message_START_PROCESS"/>
+  <bpmn2:message id="Message_IN_execute" itemRef="ItemDefinition_1" name="Message_IN_execute"/>
+  <bpmn2:message id="Message_OUT_execute" itemRef="ItemDefinition_1" name="Message_OUT_execute"/>
+  <bpmn2:interface id="Interface_1" implementationRef="com.jeetemplates.bpm.ServiceTask" name="com.jeetemplates.bpm.ServiceTask">
+    <bpmn2:operation id="execute" implementationRef="execute" name="execute">
+      <bpmn2:inMessageRef>Message_IN_execute</bpmn2:inMessageRef>
+      <bpmn2:outMessageRef>Message_OUT_execute</bpmn2:outMessageRef>
+    </bpmn2:operation>
+  </bpmn2:interface>
+  <bpmn2:process id="com.jeetemplates.bpm.process-servicetask" drools:version="1" drools:packageName="defaultPackage" drools:adHoc="false" name="Process  Service Task" isExecutable="true">
+    <bpmn2:startEvent id="StartEvent_1">
+      <bpmn2:outgoing>SequenceFlow_2</bpmn2:outgoing>
+    </bpmn2:startEvent>
+    <bpmn2:endEvent id="EndEvent_1">
+      <bpmn2:incoming>SequenceFlow_4</bpmn2:incoming>
+    </bpmn2:endEvent>
+    <bpmn2:receiveTask id="ReceiveTask_1" name="Receive Task 1" messageRef="Message_START_PROCESS">
+      <bpmn2:incoming>SequenceFlow_2</bpmn2:incoming>
+      <bpmn2:outgoing>SequenceFlow_3</bpmn2:outgoing>
+    </bpmn2:receiveTask>
+    <bpmn2:sequenceFlow id="SequenceFlow_2" drools:priority="1" name="" sourceRef="StartEvent_1" targetRef="ReceiveTask_1"/>
+    <bpmn2:serviceTask id="ServiceTask_1" name="Service Task 1" operationRef="execute">
+      <bpmn2:incoming>SequenceFlow_3</bpmn2:incoming>
+      <bpmn2:outgoing>SequenceFlow_4</bpmn2:outgoing>
+<!--       <bpmn2:ioSpecification id="InputOutputSpecification_1"> -->
+<!--         <bpmn2:dataInput id="DataInput_1" itemSubjectRef="ItemDefinition_1" name="Parameter"/> -->
+<!--         <bpmn2:dataOutput id="DataOutput_1" itemSubjectRef="ItemDefinition_1" name="Result"/> -->
+<!--         <bpmn2:inputSet id="InputSet_1"> -->
+<!--           <bpmn2:dataInputRefs>DataInput_1</bpmn2:dataInputRefs> -->
+<!--         </bpmn2:inputSet> -->
+<!--         <bpmn2:outputSet id="OutputSet_1"> -->
+<!--           <bpmn2:dataOutputRefs>DataOutput_1</bpmn2:dataOutputRefs> -->
+<!--         </bpmn2:outputSet> -->
+<!--       </bpmn2:ioSpecification> -->
+<!--       <bpmn2:dataInputAssociation id="DataInputAssociation_1"> -->
+<!--         <bpmn2:targetRef>DataInput_1</bpmn2:targetRef> -->
+<!--       </bpmn2:dataInputAssociation> -->
+<!--       <bpmn2:dataOutputAssociation id="_DataOutputAssociation_2"> -->
+<!--         <bpmn2:sourceRef>DataOutput_1</bpmn2:sourceRef> -->
+<!--       </bpmn2:dataOutputAssociation> -->
+    </bpmn2:serviceTask>
+    <bpmn2:sequenceFlow id="SequenceFlow_3" drools:priority="1" name="" sourceRef="ReceiveTask_1" targetRef="ServiceTask_1"/>
+    <bpmn2:sequenceFlow id="SequenceFlow_4" drools:priority="1" name="" sourceRef="ServiceTask_1" targetRef="EndEvent_1"/>
+  </bpmn2:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1" name="Process  Service Task">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="com.jeetemplates.bpm.process-servicetask">
+      <bpmndi:BPMNShape id="BPMNShape_1" bpmnElement="StartEvent_1">
+        <dc:Bounds height="36.0" width="36.0" x="20.0" y="98.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_2" bpmnElement="EndEvent_1">
+        <dc:Bounds height="36.0" width="36.0" x="500.0" y="100.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_ReceiveTask_1" bpmnElement="ReceiveTask_1">
+        <dc:Bounds height="50.0" width="110.0" x="110.0" y="91.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_2" bpmnElement="SequenceFlow_2" sourceElement="BPMNShape_1" targetElement="BPMNShape_ReceiveTask_1">
+        <di:waypoint xsi:type="dc:Point" x="56.0" y="116.0"/>
+        <di:waypoint xsi:type="dc:Point" x="110.0" y="116.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="BPMNShape_ServiceTask_1" bpmnElement="ServiceTask_1">
+        <dc:Bounds height="50.0" width="121.0" x="310.0" y="93.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_3" bpmnElement="SequenceFlow_3" sourceElement="BPMNShape_ReceiveTask_1" targetElement="BPMNShape_ServiceTask_1">
+        <di:waypoint xsi:type="dc:Point" x="220.0" y="116.0"/>
+        <di:waypoint xsi:type="dc:Point" x="310.0" y="118.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_4" bpmnElement="SequenceFlow_4" sourceElement="BPMNShape_ServiceTask_1" targetElement="BPMNShape_2">
+        <di:waypoint xsi:type="dc:Point" x="431.0" y="118.0"/>
+        <di:waypoint xsi:type="dc:Point" x="500.0" y="118.0"/>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+  <bpmn2:relationship id="Relationship_1">
+    <bpmn2:extensionElements>
+      <drools:ProcessAnalysisData>
+        <drools:Scenario xsi:type="drools:Scenario" id="Scenario_1" name="Scenario 1">
+          <drools:ScenarioParameters xsi:type="drools:ScenarioParameters" baseTimeUnit="ms"/>
+          <drools:ElementParameters xsi:type="drools:ElementParameters" elementId="StartEvent_1" id="ElementParameters_1">
+            <drools:TimeParameters xsi:type="drools:TimeParameters">
+              <drools:WaitTime xsi:type="drools:Parameter">
+                <drools:FloatingParameter value="1.0"/>
+              </drools:WaitTime>
+              <drools:TimeUnit>s</drools:TimeUnit>
+            </drools:TimeParameters>
+          </drools:ElementParameters>
+          <drools:ElementParameters xsi:type="drools:ElementParameters" elementId="EndEvent_1" id="ElementParameters_2">
+            <drools:TimeParameters xsi:type="drools:TimeParameters">
+              <drools:ProcessingTime xsi:type="drools:Parameter">
+                <drools:RandomDistribution max="1.0" min="0.0"/>
+              </drools:ProcessingTime>
+              <drools:TimeUnit>s</drools:TimeUnit>
+            </drools:TimeParameters>
+          </drools:ElementParameters>
+          <drools:ElementParameters xsi:type="drools:ElementParameters" elementId="ReceiveTask_1" id="ElementParameters_5">
+            <drools:TimeParameters xsi:type="drools:TimeParameters">
+              <drools:ProcessingTime xsi:type="drools:Parameter">
+                <drools:RandomDistribution max="1.0" min="0.0"/>
+              </drools:ProcessingTime>
+              <drools:TimeUnit>s</drools:TimeUnit>
+            </drools:TimeParameters>
+            <drools:CostParameters xsi:type="drools:CostParameters">
+              <drools:UnitCost xsi:type="drools:Parameter">
+                <drools:DecimalParameter value="0"/>
+              </drools:UnitCost>
+            </drools:CostParameters>
+          </drools:ElementParameters>
+          <drools:ElementParameters xsi:type="drools:ElementParameters" elementId="SequenceFlow_2" id="ElementParameters_6">
+            <drools:ControlParameters xsi:type="drools:ControlParameters">
+              <drools:Probability xsi:type="drools:Parameter">
+                <drools:FloatingParameter value="100.0"/>
+              </drools:Probability>
+            </drools:ControlParameters>
+          </drools:ElementParameters>
+          <drools:ElementParameters xsi:type="drools:ElementParameters" elementId="ServiceTask_1" id="ElementParameters_4">
+            <drools:TimeParameters xsi:type="drools:TimeParameters">
+              <drools:ProcessingTime xsi:type="drools:Parameter">
+                <drools:RandomDistribution max="1.0" min="0.0"/>
+              </drools:ProcessingTime>
+              <drools:TimeUnit>s</drools:TimeUnit>
+            </drools:TimeParameters>
+            <drools:CostParameters xsi:type="drools:CostParameters">
+              <drools:UnitCost xsi:type="drools:Parameter">
+                <drools:DecimalParameter value="0"/>
+              </drools:UnitCost>
+            </drools:CostParameters>
+          </drools:ElementParameters>
+          <drools:ElementParameters xsi:type="drools:ElementParameters" elementId="SequenceFlow_3" id="ElementParameters_7">
+            <drools:ControlParameters xsi:type="drools:ControlParameters">
+              <drools:Probability xsi:type="drools:Parameter">
+                <drools:FloatingParameter value="100.0"/>
+              </drools:Probability>
+            </drools:ControlParameters>
+          </drools:ElementParameters>
+          <drools:ElementParameters xsi:type="drools:ElementParameters" elementId="SequenceFlow_4" id="ElementParameters_8">
+            <drools:ControlParameters xsi:type="drools:ControlParameters">
+              <drools:Probability xsi:type="drools:Parameter">
+                <drools:FloatingParameter value="100.0"/>
+              </drools:Probability>
+            </drools:ControlParameters>
+          </drools:ElementParameters>
+        </drools:Scenario>
+      </drools:ProcessAnalysisData>
+    </bpmn2:extensionElements>
+    <bpmn2:source>Definitions_1</bpmn2:source>
+    <bpmn2:target>Definitions_1</bpmn2:target>
+  </bpmn2:relationship>
+</bpmn2:definitions>
